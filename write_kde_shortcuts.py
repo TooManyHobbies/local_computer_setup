@@ -18,6 +18,7 @@ def write_line_out(input_line):
             output_line = input_line
     else:
         output_line = input_line
+
     customized_file.write(output_line)   
     return
 
@@ -147,13 +148,13 @@ block_list = (dolphin_data, terminal_data, email_data, keepassxc_data, browser_d
 
 # Check for existance of "new_kglobalshortcutsrc" and delete it
 # if it exists
-filePath = "new_kglobalshortcutsrc"
+filePath = "/home/john/.config/new_kglobalshortcutsrc"
 if os.path.exists(filePath):
     os.remove(filePath)
     # print("Removed old copy of new_kglobalshortcutsrce")
 
-original_file = open("kglobalshortcutsrc", "rt")
-customized_file = open("new_kglobalshortcutsrc", "w")
+original_file = open("/home/john/.config/kglobalshortcutsrc", "rt")
+customized_file = open("/home/john/.config/new_kglobalshortcutsrc", "w")
 
 # Read config file in a line at a time, make changes if needed
 # and write out to new file.
@@ -200,5 +201,9 @@ for entry in block_list:
 original_file.close()
 customized_file.close()
 
+
+# Apply the changes
+os.rename("/home/john/.config/kglobalshortcutsrc", "/home/john/.config/kglobalshortcutsrc.bak")
+os.rename("/home/john/.config/new_kglobalshortcutsrc", "/home/john/.config/kglobalshortcutsrc")
 
 
